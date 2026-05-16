@@ -1,0 +1,1554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>คลังความรู้จิตวิทยา</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="https://i.ibb.co/p6HMzn0s/image.png">
+    <style>
+        /* --- ส่วนโครงสร้างพื้นฐาน --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Noto Sans Thai", sans-serif !important;
+        }
+
+        body {
+            text-align: center;
+            background-color: #f4f7f6;
+            color: #333;
+            padding-top: 100px; 
+            overflow-x: hidden;
+        }
+
+        /* --- แถบแบนเนอร์เมนู --- */
+        .menu-bar {
+            background-color: #4A90E2;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: flex;
+            justify-content: center;
+            padding: 5px 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 1000;
+        }
+
+        .menu-item {
+            display: inline-block;
+            position: relative;
+            padding: 25px 40px; 
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 20px; 
+            color: white;
+            transition: all 0.3s ease;
+        }
+        .menu-item:hover { background-color: rgba(255, 255, 255, 0.2); }
+        .submenu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: white;
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            width: 220px;
+            text-align: left;
+            overflow: hidden;
+        }
+        .menu-item:hover .submenu { display: block; }
+        .submenu-item {
+            padding: 15px 25px;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 16px;
+            color: #333;
+        }
+        .submenu-item:hover { background-color: #f0f7ff; color: #4A90E2; }
+
+        .full-width-section {
+            width: 100vw;
+            position: relative;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw;
+            margin-right: -50vw;
+            padding: 100px 20px;
+        }
+
+        .content-limit {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .divider {
+            width: 80px;
+            height: 4px;
+            background: #4A90E2;
+            margin: 25px auto;
+            border-radius: 2px;
+        }
+
+        /* --- แถบหน้าหลัก --- */
+        .welcome-section { background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%); border-bottom: 2px solid #e2e8f0; }
+        .welcome-badge { display: inline-block; background: #4A90E2; color: white; padding: 8px 20px; border-radius: 50px; font-size: 16px; font-weight: 600; margin-bottom: 20px; }
+        
+        #home h1 { font-weight: 900; margin-bottom: 25px; font-size: 60px; letter-spacing: -1.5px; color: #2c3e50; }
+        #home h2 { font-weight: 800; font-size: 36px; margin-bottom: 15px; }
+        #home p { font-weight: 400; line-height: 1.8; font-size: 22px; color: #555; }
+
+        .full-width-banner { background: white; border-bottom: 1px solid #f0f0f0; }
+        .full-width-section-2 { background: #f0f7ff; border-bottom: 1px solid #e1ecf8; }
+        .full-width-section-3 { background: #2d3748; padding: 120px 20px; }
+        .full-width-section-3 h1 { color: white !important; }
+        .full-width-section-3 p { color: #cbd5e0 !important; }
+
+        .journey-section {
+            background: #eef6ff; 
+            padding: 90px 20px;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .home-flex-container { display: flex; align-items: center; justify-content: space-between; gap: 50px; text-align: left; }
+        .home-text, .home-image { flex: 1; }
+        .home-image img { width: 100%; max-width: 550px; border-radius: 25px; box-shadow: 0 15px 35px rgba(0,0,0,0.12); }
+
+        /* --- ส่วน "จิตวิทยามีกี่ประเภท" --- */
+        .types-container {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .type-row {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            width: 100%;
+        }
+
+        .type-box { 
+            flex: 1; 
+            padding: 40px; 
+            background: white; 
+            border-radius: 30px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05); 
+            transition: transform 0.3s ease; 
+            text-align: left;
+        }
+        .type-box:hover { transform: translateY(-5px); }
+        .type-box h2 { color: #4A90E2; font-size: 28px; margin-bottom: 15px; }
+
+        .out-frame-img {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            object-position: 50% 15%;
+            border-radius: 50%; 
+            box-shadow: 0 15px 30px rgba(0,0,0,0.12);
+            border: 6px solid white;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            flex-shrink: 0;
+        }
+
+        .out-frame-img:hover {
+            transform: scale(1.08) rotate(2deg);
+            box-shadow: 0 20px 40px rgba(74, 144, 226, 0.25);
+            border-color: #4A90E2;
+        }
+
+        .importance-grid { display: flex; gap: 30px; margin-top: 50px; }
+        .importance-card { flex: 1; background: rgba(255, 255, 255, 0.05); padding: 50px 30px; border-radius: 40px; border: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.4s ease; text-align: center; }
+        .importance-card:hover { background: rgba(255, 255, 255, 0.1); transform: translateY(-15px); border-color: #4A90E2; }
+        .importance-card .icon { font-size: 50px; margin-bottom: 25px; display: block; }
+        .importance-card h2 { color: #63b3ed !important; }
+
+        .container {
+            max-width: 1100px; 
+            margin: 40px auto;
+            padding: 60px; 
+            background: white;
+            border-radius: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+        }
+
+        .page-content { display: none; animation: fadeIn 0.6s ease; }
+        .active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* --- [ส่วนหน้าจิตวิทยาประยุกต์ และเชิงลึก] --- */
+        .applied-banner {
+            width: 100vw; 
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%); 
+            margin-top: -100px; 
+            height: 550px; 
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://upload.wikimedia.org/wikipedia/commons/c/cb/Freud_Museum_%28Couch_and_Office%29_in_2024.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.6);
+            margin-bottom: 0px; 
+            border-radius: 0;
+        }
+
+        .deep-banner {
+            background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://doorofperception.com/wp-content/uploads/doorofperception.com-Carl-Gustav-Jung-The-Red-Book-Jungian-Psychology-Header-1.jpg');
+        }
+
+        .jung-banner {
+            background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://www.imj.org.il/sites/default/files/gidal/B02_0382$Ps0116.jpg');
+        }
+
+        .applied-banner h1 {
+            font-size: 72px; 
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+        .applied-banner p {
+            font-size: 26px; 
+            font-weight: 300;
+            max-width: 900px;
+            padding: 0 20px;
+            line-height: 1.6;
+        }
+
+        /* --- แถบแบนเนอร์หน้าเกี่ยวกับเว็บไซต์ --- */
+        .about-banner {
+            width: 100vw; 
+            position: relative;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw;
+            margin-right: -50vw;
+            background-color: #ffffff; 
+            margin-top: -100px; 
+            padding-top: 160px; 
+            padding-bottom: 70px;
+            border-bottom: none;
+            box-shadow: none;
+            text-align: left; 
+            overflow: hidden; 
+        }
+
+        .about-banner-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 50px;
+            max-width: 1300px; 
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .about-banner-text {
+            flex: 1;
+            border-left: 8px solid #4A90E2; 
+            padding-left: 30px; 
+        }
+
+        .about-banner h1 {
+            font-size: 55px; 
+            font-weight: 900; 
+            margin-bottom: 20px; 
+            color: #2c3e50;
+        }
+
+        .about-banner p {
+            font-size: 20px; 
+            line-height: 1.8;
+            color: #444;
+        }
+
+        .about-banner-image {
+            flex: 1;
+            display: flex;
+            justify-content: flex-end; 
+            position: relative;
+        }
+
+        .about-banner-img-wrapper {
+            position: relative;
+            max-width: 600px;
+            width: 100%;
+            cursor: pointer;
+        }
+
+        .about-banner-img-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 20px; 
+            left: 20px;
+            width: 100%;
+            height: 100%;
+            background-color: #4A90E2;
+            border-radius: 20px;
+            z-index: 0;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .about-banner-img-wrapper img {
+            width: 100%;
+            position: relative;
+            z-index: 1;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .about-banner-img-wrapper:hover::before {
+            top: 15px;
+            left: 15px;
+        }
+        .about-banner-img-wrapper:hover img {
+            transform: translate(5px, 5px); 
+        }
+
+        /* --- รูปทรงเรขาคณิตตกแต่ง --- */
+        .shape {
+            position: absolute;
+            z-index: 0;
+            pointer-events: none;
+        }
+        .shape-circle-1 {
+            width: 450px; height: 450px; border-radius: 50%;
+            background: linear-gradient(135deg, #00C9FF 0%, #92FE9D 100%);
+            opacity: 0.15;
+            filter: blur(5px);
+        }
+        .shape-circle-2 {
+            width: 300px; height: 300px; border-radius: 50%;
+            background: linear-gradient(135deg, #e0bfff 0%, #a150fd 100%);
+            opacity: 0.2;
+            filter: blur(3px);
+        }
+        .shape-triangle {
+            width: 0; height: 0;
+            border-left: 120px solid transparent;
+            border-right: 120px solid transparent;
+            border-bottom: 200px solid #9B59B6;
+            opacity: 0.2;
+            filter: blur(2px);
+        }
+        .shape-dots {
+            width: 250px; height: 250px;
+            background-image: radial-gradient(rgba(44, 62, 80, 0.1) 3px, transparent 3px);
+            background-size: 30px 30px;
+            opacity: 1;
+        }
+
+        /* --- [ลูกเล่น Storyboard เลื่อนแนวตั้งไหลแนวนอน] --- */
+        .storyboard-wrapper {
+            width: 100vw;
+            position: relative;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw;
+            margin-right: -50vw;
+            height: 710vh; 
+            background: linear-gradient(180deg, #def4ff 0%, #EBF6FA 60%, #f0f0f0 100%);
+        }
+
+        .storyboard-sticky {
+            position: sticky;
+            top: 100px; 
+            height: calc(100vh - 100px); 
+            width: 100vw;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+        }
+
+        .storyboard-bg-progress {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            width: 0%; 
+            height: 100%;
+            background-color: #a1e1ff; 
+            z-index: 0; 
+            transition: width 0.3s ease-out;
+        }
+
+        .storyboard-track {
+            display: flex;
+            height: 100%;
+            width: 600vw; 
+            position: relative;
+            z-index: 1;
+            will-change: transform;
+        }
+
+        .storyboard-slide {
+            width: 100vw;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 60px;
+            padding: 0 10vw; 
+            box-sizing: border-box;
+            position: relative; 
+        }
+
+        .storyboard-img {
+            flex: 1.5; 
+            display: flex;
+            justify-content: flex-end;
+            position: relative;
+            z-index: 2;
+        }
+
+        .storyboard-img img {
+            width: auto; 
+            height: auto;
+            max-width: 100%; 
+            max-height: 75vh; 
+            object-fit: contain; 
+            border-radius: 15px; 
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15); 
+        }
+
+        .storyboard-text {
+            flex: 1; 
+            text-align: left;
+            font-size: 21px; 
+            line-height: 1.8;
+            color: #2c3e50; 
+            position: relative;
+            z-index: 2;
+            -webkit-font-smoothing: antialiased; 
+            transform: translateZ(0); 
+            backface-visibility: hidden;
+
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            padding: 35px 45px;
+            border-radius: 25px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+        }
+
+        /* --- ตัวอักษรตกแต่งพื้นหลัง Storyboard --- */
+        .decor-word {
+            position: absolute;
+            font-size: 5vw; 
+            font-weight: 900;
+            font-family: "Impact", "Arial Black", sans-serif;
+            text-transform: uppercase;
+            z-index: 1;
+            pointer-events: none;
+            letter-spacing: 0px;
+            opacity: 0.6; 
+            line-height: 1;
+            white-space: nowrap;
+        }
+        .decor-word .outline {
+            color: transparent;
+        }
+        .decor-black .outline { -webkit-text-stroke: 3px #111; }
+        .decor-black .solid { color: #111; }
+        .decor-navy .outline { -webkit-text-stroke: 3px #204a75; }
+        .decor-navy .solid { color: #2c3e50; }
+        .decor-blue .outline { -webkit-text-stroke: 3px #4A90E2; }
+        .decor-blue .solid { color: #4A90E2; }
+
+
+        @media (min-width: 901px) {
+            .storyboard-slide { gap: 0; } 
+
+            .storyboard-slide:nth-child(1) .storyboard-img { transform: translateY(-10vh); }
+            .storyboard-slide:nth-child(1) .storyboard-text { transform: translateY(8vh) translateX(-4vw); }
+
+            .storyboard-slide:nth-child(2) { flex-direction: row-reverse; }
+            .storyboard-slide:nth-child(2) .storyboard-img { transform: translateY(15vh); }
+            .storyboard-slide:nth-child(2) .storyboard-text { transform: translateY(-5vh) translateX(4vw); }
+
+            .storyboard-slide:nth-child(3) .storyboard-img { transform: translateY(0vh); }
+            .storyboard-slide:nth-child(3) .storyboard-text { transform: translateY(12vh) translateX(-6vw); }
+
+            .storyboard-slide:nth-child(4) { flex-direction: row-reverse; }
+            .storyboard-slide:nth-child(4) .storyboard-img { transform: translateY(-5vh) scale(0.9); }
+            .storyboard-slide:nth-child(4) .storyboard-text { transform: translateY(10vh) translateX(5vw); }
+
+            .storyboard-slide:nth-child(5) .storyboard-img { transform: translateY(-15vh); }
+            .storyboard-slide:nth-child(5) .storyboard-text { transform: translateY(8vh) translateX(-3vw); }
+
+            .storyboard-slide:nth-child(6) { flex-direction: row-reverse; }
+            .storyboard-slide:nth-child(6) .storyboard-img { transform: translateY(12vh); }
+            .storyboard-slide:nth-child(6) .storyboard-text { transform: translateY(-10vh) translateX(5vw); }
+
+            .storyboard-slide:nth-child(7) .storyboard-img { transform: translateY(-5vh); }
+            .storyboard-slide:nth-child(7) .storyboard-text { transform: translateY(5vh) translateX(-5vw); }
+        }
+
+        .nowrap {
+            white-space: nowrap;
+        }
+
+        .article-section {
+            width: 100vw;
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 100px 50px;
+            background-color: #f4f7f6;
+        }
+
+        .article-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); 
+            justify-content: center; 
+            max-width: 1400px; 
+            margin: 0 auto;
+            gap: 60px; 
+        }
+
+        .article-box {
+            background: white;
+            height: 450px;
+            border-radius: 35px;
+            box-shadow: 0 15px 45px rgba(0,0,0,0.08);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #e0e0e0;
+            padding: 0;
+            width: 100%;
+            overflow: hidden; 
+            cursor: pointer;
+            position: relative;
+        }
+
+        .article-box:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 30px 60px rgba(74, 144, 226, 0.2);
+            border-color: #4A90E2;
+        }
+
+        .article-img-full {
+            width: 100%;
+            height: 100%;
+            object-position: center 20%;
+            object-fit: cover; 
+            display: block;
+        }
+
+        .glass-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 26%; 
+            background: rgba(255, 255, 255, 0.2); 
+            backdrop-filter: blur(8px); 
+            -webkit-backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .glass-text {
+            color: #f8fcff;
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5); 
+            text-transform: uppercase;
+            padding: 0 10px;
+        }
+
+        .about-card {
+            background: #f8fafb;
+            padding: 40px;
+            border-radius: 20px;
+            border-left: 10px solid #4A90E2;
+            text-align: left;
+            margin-top: 30px;
+        }
+        .about-img {
+            display: block; width: 60%; max-width: 500px; height: auto;
+            border-radius: 15px; margin: 30px auto; box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        }
+        
+        .quote-container {
+            margin: 40px 0;
+            text-align: center;
+            position: relative;
+            padding: 0 20px;
+        }
+        .quote { 
+            font-style: italic; 
+            color: #2c3e50; 
+            font-size: 26px; 
+            font-weight: 300; 
+            line-height: 1.6;
+            position: relative;
+            display: inline-block;
+        }
+        .quote span { color: #4A90E2; font-weight: 700; }
+        .quote-author {
+            display: block;
+            margin-top: 15px;
+            font-size: 18px;
+            color: #888;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+
+        .author-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: left;
+        }
+        
+        .author-card {
+            display: flex;
+            background: #f8fafb;
+            border-radius: 30px;
+            padding: 50px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.05);
+            gap: 50px;
+            align-items: center;
+            margin-bottom: 60px;
+        }
+        
+        .author-img {
+            width: 250px; 
+            height: 250px; 
+            border-radius: 50%; 
+            object-fit: cover; 
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1); 
+            flex-shrink: 0;
+            border: 5px solid rgb(124, 184, 252);
+        }
+        
+        .author-info h3 { 
+            font-size: 29px; 
+            color: #2c3e50; 
+            margin-bottom: 10px; 
+        }
+        
+        .author-info p { 
+            font-size: 18px; 
+            line-height: 1.8; 
+            color: #555; 
+            margin-bottom: 15px; 
+        }
+        
+        .author-tags { 
+            display: flex; 
+            gap: 10px; 
+            flex-wrap: wrap; 
+            margin-top: 20px; 
+        }
+        
+        .tag { 
+            background: #eef6ff; 
+            color: #4A90E2; 
+            padding: 8px 18px; 
+            border-radius: 20px; 
+            font-size: 14px; 
+            font-weight: 600; 
+        }
+
+        .contact-section-title { 
+            font-size: 28px; 
+            color: #2c3e50; 
+            margin-bottom: 30px; 
+            text-align: center; 
+            font-weight: 700; 
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 60px;
+        }
+        
+        .contact-box {
+            background: white;
+            padding: 25px 20px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            text-align: center;
+            transition: transform 0.3s ease;
+            border: 1px solid #f0f0f0;
+        }
+        
+        .contact-box:hover { 
+            transform: translateY(-10px); 
+            border-color: #4A90E2; 
+        }
+        
+        .contact-box strong { 
+            display: block; 
+            color: #4A90E2; 
+            font-size: 18px; 
+            margin-bottom: 8px; 
+        }
+        
+        .contact-box span { 
+            color: #555; 
+            font-size: 16px; 
+            word-break: break-all;
+        }
+
+        @media (max-width: 1200px) {
+            .article-grid { grid-template-columns: repeat(2, 1fr); gap: 40px; }
+        }
+
+        @media (max-width: 800px) {
+            .article-grid { grid-template-columns: 1fr; gap: 30px; }
+            .article-box { height: 350px; }
+        }
+
+        @media (max-width: 900px) {
+            .home-flex-container, .importance-grid, .type-row { flex-direction: column; text-align: center; }
+            .type-row { gap: 20px; }
+            #home h1 { font-size: 40px; }
+            .out-frame-img { order: -1; }
+            .applied-banner { height: 400px; margin-top: -100px; }
+            .applied-banner h1 { font-size: 42px; }
+            .applied-banner p { font-size: 20px; }
+            
+            .about-banner { padding-top: 130px; padding-bottom: 50px; text-align: center; }
+            .about-banner-container { flex-direction: column; gap: 30px; }
+            .about-banner-text { border-left: none; padding-left: 0; }
+            .about-banner h1 { font-size: 40px; }
+            .about-banner p { font-size: 18px; }
+
+            .storyboard-wrapper { height: auto; padding: 50px 20px; background: #f4f7f6; } 
+            .storyboard-sticky { position: static; height: auto; }
+            .storyboard-track { width: 100vw; display: block; transform: none !important; }
+            .storyboard-slide { flex-direction: column !important; height: auto; padding: 30px 0; gap: 30px; width: 100%; overflow: hidden;}
+            .storyboard-img, .storyboard-text { transform: none !important; }
+            .storyboard-img { justify-content: center; }
+            .storyboard-text { padding: 25px; text-align: left; }
+            .shape { display: none; } 
+
+            .decor-word {
+                font-size: 13vw; 
+                opacity: 0.18; 
+                letter-spacing: -2px; 
+            }
+
+            .author-card { flex-direction: column; text-align: center; padding: 30px; gap: 30px; }
+            .author-tags { justify-content: center; }
+            .contact-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 500px) {
+            .contact-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="menu-bar">
+        <div class="menu-item" onclick="showPage('home')">หน้าหลัก</div>
+        <div class="menu-item">
+            หมวดหมู่ ▾
+            <div class="submenu">
+                <div class="submenu-item" onclick="showPage('applied')">จิตวิทยาประยุกต์</div>
+                <div class="submenu-item" onclick="showPage('deep')">จิตวิทยาเชิงลึก</div>
+            </div>
+        </div>
+        <div class="menu-item" onclick="showPage('about')">เกี่ยวกับเว็บไซต์</div>
+    </div>
+
+    <div id="home" class="page-content active">
+        <div class="full-width-section welcome-section">
+            <div class="content-limit">
+                <span class="welcome-badge">ยินดีต้อนรับสู่คลังความรู้จิตวิทยา</span>
+                <h1>พื้นที่แห่งการศึกษา <br> กระบวนคิดและจิตใจมนุษย์</h1>
+                <p style="max-width: 800px; margin: 0 auto; margin-bottom: 35px;">
+                    ผมสร้าง<span class="nowrap">เว็บไซต์นี้</span>ขึ้นมาเพื่อสะสม<span class="nowrap">ความรู้</span>ทาง<span class="nowrap">จิตวิทยา</span>ที่ผมสนใจ ให้อยู่ใน<span class="nowrap">รูปแบบ</span>ที่เป็นระเบียบและ<span class="nowrap">เข้าใจง่าย</span>
+                    ในเว็บไซต์ของผมคุณจะได้พบกับ<span class="nowrap">ความรู้</span>เล็ก ๆ น้อย ๆ ทาง<span class="nowrap">จิตวิทยา</span> <br> ผมเชื่อว่าหากคุณได้อ่านมันจะมี<span class="nowrap">ประโยชน์</span>กับคุณไม่ในทางตรงก็ทางอ้อมครับ
+                </p>
+                <p style="font-weight: 600; color: #4A90E2;">สิ่งที่คุณจะได้เรียนรู้จากเว็บไซต์นี้: จิตวิทยาในชีวิตประจำวัน • ทฤษฏีทางจิตวิทยา • ประวัติของบุคคลสำคัญ</p>
+            </div>
+        </div>
+
+        <div class="full-width-section full-width-banner">
+            <div class="home-flex-container content-limit">
+                <div class="home-text">
+                    <h1 style="color:#2c3e50; font-size: 60px;">จิตวิทยา คืออะไร?</h1>
+                    <p style="font-size: 22px;">จิตวิทยาคือ<span class="nowrap">ศาสตร์วิชา</span>ที่ศึกษาเกี่ยวกับ <b> พฤติกรรม อารมณ์ <span class="nowrap">ความรู้สึก</span> ความคิด และ<span class="nowrap">กระบวนการ</span>ทางจิต</b> ของมนุษย์ <br> และสัตว์ เพื่อทำความเข้าใจถึงสาเหตุของ<span class="nowrap">พฤติกรรม</span>ต่าง ๆ <br> รวมถึงทำนาย<span class="nowrap">พฤติกรรม</span>ที่อาจเกิดในอนาคตและควบคุม<span class="nowrap">พฤติกรรม</span>นั้น ๆ เพื่อเปลี่ยนแปลงไปในทางที่ดี</p>
+                </div>
+                <div class="home-image">
+                    <img src="https://bouve.northeastern.edu/wp-content/uploads/2024/01/What-Is-Applied-Psychology-Hero-Image.jpg" alt="Psychology Concept">
+                </div>
+            </div>
+        </div>
+
+        <div class="full-width-section full-width-section-2">
+            <div class="content-limit">
+                <h1 style="text-align: center; margin-bottom: 30px;">จิตวิทยามีกี่ประเภท?</h1>
+                <p style="text-align: center; max-width: 900px; margin: 0 auto; margin-bottom: 50px;">เราสามารถแบ่งการศึกษาทางจิตวิทยาออกเป็น 2 แนวทางหลัก ตามลักษณะการนำไปใช้งานครับ</p>
+                
+                <div class="types-container">
+                    <div class="type-row">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/1/13/Photo_of_Hugo_M%C3%BCnsterberg.jpg" alt="Hugo Münsterberg" class="out-frame-img">
+                        <div class="type-box">
+                            <h2>จิตวิทยาประยุกต์</h2>
+                            <p style="font-size: 20px !important;">การนำทฤษฎีมาใช้แก้ปัญหาจริง เช่น จิตวิทยาชุมชน จิตวิทยาองค์กร และจิตวิทยาคลินิก</p>
+                        </div>
+                    </div>
+
+                    <div class="type-row">
+                        <div class="type-box">
+                            <h2>จิตวิทยาเชิงลึก</h2>
+                            <p style="font-size: 20px !important;">เน้นศึกษาแรงขับเคลื่อนจากจิตไร้สำนึก และโครงสร้างจิตใจที่ซับซ้อนในเชิงลึก เช่น จิตวิเคราะห์ </p>
+                        </div>
+                        <img src="https://cdn.historycollection.com/wp-content/uploads/2019/11/freud_1885-745x1024.jpg" alt="Sigmund Freud" class="out-frame-img">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="full-width-section full-width-section-3">
+            <div class="content-limit">
+                <h1>ทำไมผมถึงสนับสนุนให้ทุกคนศึกษาจิตวิทยา?</h1>
+                <p style="max-width: 850px; margin: 0 auto;">เพราะจิตวิทยาคือสิ่งที่อยู่รอบตัวเรา ทั้งตัวเราเองและคนรอบตัว</p>
+                <div class="importance-grid">
+                    <div class="importance-card">
+                        <span class="icon">💬</span>
+                        <h2>ความสัมพันธ์ที่ดี</h2>
+                        <p>สร้างความสัมพันธ์ที่ดีผ่านความเข้าอกเข้าใจในตัวผู้อื่น</p>
+                    </div>
+                    <div class="importance-card">
+                        <span class="icon">🧠</span>
+                        <h2>รู้เขา รู้เรา</h2>
+                        <p>รู้เท่าทันอคติทางความคิดของตน และพฤติกรรมของคนรอบข้าง</p>
+                    </div>
+                    <div class="importance-card">
+                        <span class="icon">❤️</span>
+                        <h2>สุขภาพจิตที่ดี</h2>
+                        <p>สร้างเกราะป้องกันทางอารมณ์ และรักษาใจจากปัญหาต่าง ๆ</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="journey-section">
+            <div class="content-limit">
+                <h2 style="font-size: 32px; margin-bottom: 20px;">เป้าหมายของผม</h2>
+                <div class="divider"></div>
+                <p style="font-size: 22px; color: #666; max-width: 800px; margin: 0 auto;">
+                    ปัจจุบันผมกำลังศึกษา<span class="nowrap">ทฤษฏี</span>ต่าง ๆ ทาง<span class="nowrap">จิตวิทยา</span>เพื่อเตรียมความพร้อมสู่การเรียน<span class="nowrap">หลักสูตร</span><span class="nowrap">จิตวิทยา</span>ในระดับ<span class="nowrap">ปริญญาตรี</span>อย่างเป็นทางการ
+                    นอกจากนี้ผมยังศึกษา<span class="nowrap">จิตวิทยา</span>เพราะ <br> ความหลงใหลที่ผมมีต่อ<span class="nowrap">ความซับซ้อน</span>ในจิตใจมนุษย์
+                    และหัวข้อที่ผมสนใจเป็นพิเศษคือ <br> <b>Collective Unconscious</b> และ <b>การวิเคราะห์ความฝัน</b>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div id="other-pages-container" style="display:none;">
+        
+        <div id="applied" class="page-content">
+            <div class="applied-banner">
+                <h1>จิตวิทยาประยุกต์</h1>
+                <p>"การนำทฤษฎีมาแก้ปัญหาจริงในสังคม เพื่อพัฒนาคุณภาพชีวิตมนุษย์ในทุกมิติ"</p>
+            </div>
+
+            <div class="article-section">
+                <div class="article-grid">
+                    <div class="article-box" onclick="showPage('applied-1')">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6782ee-U7oTTASyL7kb2Jq8agX84nF0dbQQjQkLmq9NY-dgx1Den93swOzN_grhQr5ciUotraR7n4xCadcaX0f0Y479KhCfplmLjKF5I&s=10" class="article-img-full">
+                        <div class="glass-overlay"><span class="glass-text">Milton H. Erickson <br> <small> บิดาแห่งการสะกดจิตบำบัดสมัยใหม่ </small></span></div>
+                    </div>
+
+                    <div class="article-box" onclick="showPage('applied-2')">
+                        <img src="https://m.media-amazon.com/images/I/81PPq8CP4sL._AC_UF1000,1000_QL80_.jpg" class="article-img-full">
+                        <div class="glass-overlay"><span class="glass-text">จิตวิทยาการเจรจาต่อรอง <br> ในสถานการณ์ที่แพ้ไม่ได้ </span></div>
+                    </div>
+
+                    <div class="article-box" onclick="showPage('applied-3')">
+                        <img src="https://assets.penguinrandomhouse.com/wp-content/uploads/2019/05/18130129/PRH-James-Clear-Interview-Article-Header-1080x1080-1.png" class="article-img-full">
+                        <div class="glass-overlay"><span class="glass-text">จิตวิทยาการสร้างนิสัยที่ดี <br> และการทำลายนิสัยแย่ ๆ </span></div>
+                    </div>
+
+                    <div class="article-box" onclick="showPage('applied-4')">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/c/cc/BenFranklinDuplessis.jpg" class="article-img-full">
+                        <div class="glass-overlay"><span class="glass-text">ความฉลาดทางสังคมแบบ<br> Benjamin Franklin </span></div>
+                    </div>
+
+                    <div class="article-box" onclick="showPage('applied-5')">
+                        <img src="https://books.google.co.th/books/content?id=xQSOMAflpu8C&hl=th&pg=PP1&img=1&zoom=3&sig=ACfU3U3MhQTbA1_JUiPaO5VdHLx6ilHAdw&w=1280" class="article-img-full">
+                        <div class="glass-overlay"><span class="glass-text">  จิตวิทยาการรับฟัง <br> และการแสดงความเข้าอกเข้าใจ </span></div>
+                    </div>
+
+                    <div class="article-box" onclick="showPage('applied-6')">
+                        <img src="https://historicmissourians.shsmo.org/wp-content/uploads/2020/09/carnegie_main_lg.jpg" class="article-img-full">
+                        <div class="glass-overlay"><span class="glass-text">วิธีชนะมิตรและจูงใจคน <br> Dale Carnegie </span></div>
+                    </div>
+
+                    </div>
+            </div>
+        </div>
+
+        <div id="deep" class="page-content">
+            <div class="applied-banner deep-banner">
+                <h1>จิตวิทยาเชิงลึก</h1>
+                <p>"การศึกษาเบื้องลึกของจิตใจมนุษย์ แรงขับเคลื่อนและเงาที่ซ่อนอยู่ในใจ"</p>
+            </div>
+
+            <div class="article-section">
+                <div class="article-grid">
+                    <div class="article-box" onclick="showPage('jung-article')">
+                        <img src="https://m.media-amazon.com/images/M/MV5BZDQ2NThkNzYtMjU2Zi00NDZmLWFjOWItNmU0OWExMDliMDZhXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg" alt="Carl Jung" class="article-img-full">
+                        <div class="glass-overlay"><span class="glass-text">Carl Gustav Jung <br> <small>สัญลักษณ์และโครงสร้างจิตใจ  </small></span></div>
+                    </div>
+                    
+                    <div class="article-box" onclick="showPage('deep-2')">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Sigmund_Freud_1926.jpg/960px-Sigmund_Freud_1926.jpg" alt="Sigmund Freud" class="article-img-full">
+                        <div class="glass-overlay"><span class="glass-text">Sigmund Freud <br> <small> บิดาแห่งจิตวิเคราะห์ </small> </span></div>
+                    </div>
+
+                    <div class="article-box" onclick="showPage('deep-3')">
+                        <img src="https://i.pinimg.com/736x/3b/f4/82/3bf482d85dd51314404c2f6c5ed60d8c.jpg" class="article-img-full">
+                        <div class="glass-overlay"><span class="glass-text">Amygdala <br> เมื่ออารมณ์อยู่เหนือเหตุผล </span></div>
+                    </div>
+
+                    <div class="article-box" onclick="showPage('deep-4')">
+                        <img src="https://m.media-amazon.com/images/I/61MmBj3XHML._AC_UF1000,1000_QL80_.jpg" class="article-img-full">
+                        <div class="glass-overlay"><span class="glass-text">มนุษย์และสัญลักษณ์ </span></div>
+                    </div>
+
+                    <div class="article-box" onclick="showPage('deep-5')">
+                        <img src="https://www.simplypsychology.org/wp-content/uploads/freud-iceberg-theory-725x1024.jpeg" class="article-img-full">
+                        <div class="glass-overlay"><span class="glass-text">ทฤษฏีจิตไร้สำนึก <br> โดย ซิกมันด์ ฟรอยด์ </span></div>
+                    </div>
+                    
+                    <div class="article-box" onclick="showPage('deep-6')">
+                        <img src="https://i.pinimg.com/736x/4d/c0/47/4dc0476d6d11ae39cfd11ec7d4a7c3ef.jpg" class="article-img-full">
+                        <div class="glass-overlay"><span class="glass-text">Anima และ Animus <br> สมดุลแห่งตัวตน </span></div>
+                    </div>
+
+                    <!--
+                    <div class="article-box" onclick="showPage('ใส่-id-หน้าที่นี่-เช่น-deep-7')">
+                        <img src="ใส่ลิงก์รูปหน้าปก" class="article-img-full">
+                        <div class="glass-overlay"><span class="glass-text">ชื่อเรื่อง <br> <small> คำอธิบายสั้นๆ </small></span></div>
+                    </div>
+                    ตัวสำเร็จรูปปปปปปปป สำหรับปก-->
+
+                    </div>
+            </div>
+        </div>
+
+        <div id="jung-article" class="page-content">
+            <div class="applied-banner jung-banner" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://www.imj.org.il/sites/default/files/gidal/B02_0382$Ps0116.jpg');">
+                <h1>Carl Gustav Jung</h1>
+                <p>"Who looks outside, dreams; who looks inside, awakes."</p>
+            </div>
+            <div class="article-section">
+                <div class="content-limit" style="text-align: left; background: white; padding: 60px; border-radius: 30px; box-shadow: 0 10px 40px rgba(0,0,0,0.05);">
+
+                    <h2 style="font-size: 36px; color: #4A90E2; margin-bottom: 25px;">ชีวประวัติโดยย่อ</h2>
+
+                    <p style="font-size: 20px; line-height: 1.8; margin-bottom: 20px;">
+                        คาร์ล กุสตาฟ จุง (Carl Gustav Jung) หรือ จุงเกิดเมื่อวันที่ 26 กรกฎาคม ค.ศ. 1875 และเสียชีวิตในวันที่ 6 มิถุนายน
+                        ค.ศ. 1961 (อายุ 85 ปี)
+                        เขาเกิดที่เมืองเคสวิล ประเทศสวิตเซอร์แลนด์ ทำอาชีพเป็นจิตแพทย์ นักจิตวิทยา นักจิตบำบัด และเป็นผู้ก่อตั้ง Analytical
+                        Psychology หรือ จิตวิทยาเชิงวิเคราะห์ เขาเป็นนักวิชาการผู้สร้างคิดค้นสิ่งใหม่ ๆ
+                        ให้กับโลกซึ่งในที่นี้คือทฤษฏีทางจิตวิทยา
+                        ในปัจจุบันนี้เขาโด่งดังมากในฐานะผู้คิดค้นทฤษฏี คนเก็บตัว และ คนเปิดเผย (Introversion, Extroversion)
+                        ซึ่งเป็นรากฐานให้กับแบบทดสอบที่กำลังฮิตในหมู่วัยรุ่นทั่วโลกอย่าง MBTI แต่จริง ๆ แล้ว
+                        จุงยังคิดค้นทฤษฏีอีกมากมายที่สำคัญและมีผลต่อวงการจิตวิทยาและศาสตร์สาขาอื่น ๆ อย่างมากทั้ง วรรณกรรม ปรัชญา ศาสนศึกษา
+                        หรือจิตเวชศาสตร์
+                        ด้วยผลงานอันมากมายเหล่านี้ทำให้เขาเป็นที่ยกย่องจากทั่วโลกว่าเป็นหนึ่งในนักจิตวิทยาผู้มีอิทธิพลกับโลกมากที่สุดตลอดกาล
+                    </p>
+
+                    <p style="font-size: 20px; line-height: 1.8; margin-bottom: 20px;">
+                        <b>ในช่วงวัยเด็ก</b> จุงเป็นเด็กที่ค่อนข้างเก็บตัวและมักใช้เวลาอยู่กับจินตนาการของตัวเอง
+                        จุงในตอนเด็กมีความเชื่อว่าตัวเขาเองมีบุคลิกภาพสองบุคลิกตามที่เขาได้เล่าไว้ในหนังสือ Memories, Dreams, Reflections
+                        ซึ่งบุคลิกหมายเลข 1 คือบุคลิกของเด็กทั่วไปที่เกิดในเมืองนั้น หรือที่เขาเรียกว่าเป็นบุคลิกที่เขารู้ตัว บุคลิกหมายเลข
+                        2
+                        คือตัวตนที่ลึกลับผู้มีเกียรติ มีอำนาจ และมีความรู้จากอดีต ซึ่งเป็นตัวตนที่อยู่ในจิตไร้สำนึกของเขา
+                        หรือก็คืออยู่เหนือการรับรู้ของเขา ซึ่งบุคลิกที่ 2 นี้ จุงมองว่าเป็นผลมาจากการเชื่อมต่อกับจิตไร้สำนึกร่วม หรือ
+                        Collective
+                        Unconscious ตามทฤษฏีของเขา และในช่วง 10 ขวบเขามีพิธีกรรมนึงแอบทำอย่างลับ ๆ
+                        คือเขาได้แกะสลักหุ่นไม้ตัวน้อยแล้วนำไปใส่ในกล่องดินสอ พร้อมกับก้อนหินที่เขาไปเก็บมาจากแม่น้ำ
+                        แล้วเอากล่องไปซ่อนไว้ในห้องใต้หลังคา ซึ่งเขาจะคอยแวะไปหาบ่อย ๆ โดยไม่ได้บอกใคร
+                        ซึ่งในหลายปีต่อมาที่เขาค้นพบว่าพิธีกรรมนี้ที่เขาทำไปด้วยสัญชาติของเด็ก
+                        มีความคล้ายคลึงกับพิธีกรรมของอารยธรรมโบราณที่เขาไม่เคยรู้จักมาก่อน
+                        ทำให้ความทรงจำในส่วนนี้ของเขาช่วยเป็นหลักฐานให้กับทฤษฏีจิตไร้สำนึกร่วมของเขา
+                        เพราะมันทำให้เขาเห็นถึงการเชื่อมโยงกันของมนุษย์ในระดับสัญชาตญาณ
+                    </p>
+
+                    <div style="display: flex; align-items: center; gap: 15px; margin-left: 250px; margin-bottom: 20px;">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Jung_piccolo.jpg/250px-Jung_piccolo.jpg">
+
+                        <div>
+                            <p>คาร์ล จุง ในวัยเด็กช่วงต้นทศวรรษ 1880</p>
+                            <a href="https://en.wikipedia.org/wiki/File:Jung_piccolo.jpg" target="_blank">ที่มารูปภาพจาก Wikipedia</a>
+                        </div>
+                    </div>
+
+                    <p style="font-size: 20px; line-height: 1.8; margin-bottom: 20px;">
+                        นอกจากนี้ในวัยเด็กครอบครัวของจุงมีฐานะที่ยากจน
+                        จุงเล่าว่าเขาจำเป็นต้องใช้ชีวิตอย่างประหยัดและพบกับปัญหาความขัดสนทางการเงินอยู่บ่อย ๆ
+                        แต่ในอีกมุมเขาก็อยู่ในสังคมที่มีแต่คนฐานะดี ทำให้เขารู้สึกแตกต่างและแปลกแยก
+                        หลายครั้งเขาต้องใส่เสื้อที่ดูดีแต่เก่าและต้องคอยระมัดระวังการใช้เงินอยู่ตลอด ต่างกับเพื่อน ๆ
+                        ที่โรงเรียนซึ่งมีฐานะร่ำรวยกว่า
+                        พ่อของเขาเป็นศาสนาจารย์ในโบสถ์ ซึ่งมีสถานะทางสังคมและได้รับความเคารพจากคนในชุมชน
+                        แต่ในความเป็นจริงพ่อของจุงนั้นมีรายได้ที่น้อยมาก จุงมีรู้สึกว่าพ่อของเขาเป็นคนที่น่าเชื่อถือแต่กลับไร้อำนาจและอ่อนแอ
+                        ส่วนแม่ของจุงเป็นคนที่มีพฤติกรรมแปลก ๆ ที่จุงสังเกตเห็น จุงเล่าว่าเธอเป็นผู้หญิงที่ดูปกติในตอนกลางวัน
+                        แต่ในตอนกลางคืนเธอจะกลายเป็นคนที่ดูลึกลับ และเธอมักจะบอกว่ามีวิญญาณมาหาเธอในตอนกลางคืน
+                    </p>
+
+                    <p style="font-size: 20px; line-height: 1.8; margin-bottom: 20px;">
+                        พ่อกับแม่ของจุงมีความสัมพันธ์ที่ไม่ค่อยดีนัก
+                        จนเมื่อจุงอายุได้สามขวบแม่ของเขาได้เข้ารับการรักษาจากอาการป่วยทางกายที่ระบุสาเหตุไม่ได้
+                        ซึ่งจุงเชื่อว่าเป็นผลมาจากปัญหาชีวิตคู่ที่เธออาจเข้าไม่ได้กับพ่อของจุง
+                        เรื่องนี้ส่งผลต่อมุมมองของจุงและทำให้เขามองว่าผู้หญิงโดยทั่วไปมีความไม่น่าเชื่อถือโดยกำเนิด
+                        เพราะการที่แม่ของจุงต้องเข้ารับการรักษาหลายเดือนส่งผลให้จุงไม่ได้อยู่กับแม่ทำให้เขารู้สึกโดดเดี่ยว
+                        จนเกิดเป็นแผลใจและเปลี่ยนทัศนคติในตอนแรกที่เขามีต่อผู้หญิงไป
+                        แต่อย่างไรก็ตามจุงมีความสัมพันธ์ที่ดีกับพ่อและแม่ของเขาในระดับนึง
+                    </p>
+
+                    <p style="font-size: 20px; line-height: 1.8; margin-bottom: 20px;">
+                        เมื่ออายุราว ๆ 12 ปีเขาเข้าเรียนที่โรงเรียนมัธยมศึกษาในเมืองบาเซิล และมีเหตุการณ์สำคัญเกิดขึ้น
+                        เขาถูกเพื่อนผลักจนล้มลงและศรีษะกระแทกกับพื้นจนสลบไป ในตอนนั้นมีความคิดนึงผุดเข้ามาในใจเขาว่า
+                        "ต่อไปนี้ไม่ต้องไปโรงเรียนแล้ว" นับจากนั้นทุกครั้งที่เขาเดินไปโรงเรียนหรือทำการบ้านเขาจะเป็นลม
+                        ทำให้เขาได้อยู่บ้านเป็นเวลา 6 เดือน จนกระทั่งวันนึงเขาได้ยินพ่อของเขากำลังพูดคุยกับเพื่อนอย่างกระวนกระวายว่า
+                        "ถ้าลูกชายของฉันป่วยแบบนี้ต่อไป ในอนาคตเขาจะเลี้ยงดูตัวเองได้อย่างไร"
+                        คำพูดนี้ทำให้เขาเริ่มตระหนักได้ถึงความสำคัญของการเรียน เขาจึงฮึดสู้และเข้าไปในห้องทำงานของพ่อ
+                        แล้วเริ่มศึกษาไวยากรณ์ภาษาละตินอย่างตั้งใจ แม้จะเป็นลมไปอีกสามครั้ง
+                        แต่สุดท้ายเขาก็ชนะความอยากเป็นลมได้และไม่เป็นลมอีกเลย
+                    </p>
+
+                    <p style="font-size: 20px; line-height: 1.8; margin-bottom: 20px;">
+                        <b>ช่วงวัยรุ่นและการศึกษาในมหาวิทยาลัย</b> เมื่อเข้าสู่ช่วงวัยรุ่นจุงกลายเป็นคนที่ชอบอ่านหนังสือมาก
+                        เขามักจะเข้าไปในห้องสมุดของพ่อกับปู่และอ่านหนังสือที่อยู่ในนั้น และในช่วงที่จุงอายุระหว่างช่วง 17-18
+                        เขาได้มีความสนใจในปรัชญา โดยเฉพาะ <i>Pythagoras</i>, <i>Heraclitus</i> (นักปรัชญาคนโปรดตลอดชีวิตของจุง), <i>Empedocles</i>, <i>Plato</i>
+                        นอกจากนี้จุงยังชื่นชอบงานเขียนเรื่อง <i>The World as Will and Representation</i> ของ <i>Arthur Schopenhauer</i> (โชเพนฮาวเออร์) กับ
+                        <i>Critique of Pure Reason</i> ของ <i>Immanuel Kant</i> (คานต์) และ <i>Meister Eckhart</i> (นักปรัชญาคนโปรดตลอดชีวิตของจุง) ทั้งนี้เขายังได้รู้จักกับ <i>Johann Wolfgang von
+                        Goethe</i> (เกอเธ่) ผ่านงานเขียนอันโด่งดังอย่าง <i>Faust</i> 
+                        (จุงมีตำนานในครอบครัวที่เล่าว่าปู่ของจุงเป็นบุตรนอกสมรสของเกอเธ่กับย่าทวดของจุง) นอกจากนี้ในช่วงวัยรุ่นจุงก็มีความสนใจในเรื่อง
+                        จิตวิญญาณ ศาสนา และวรรณกรรม
+                    </p>
+
+                    <p style="font-size: 20px; line-height: 1.8; margin-bottom: 20px;">
+                        ในตอนแรก จุงมีความสนใจในโบราณคดีและวิทยาศาสตร์ธรรมชาติเพราะเป็นสิ่งที่เขาสนใจมาตลอด แต่เนื่องด้วยมหาวิทยาลัยบาเซิล
+                        ซึ่งเป็นมหาลัยวิทยาลัยในเมืองบ้านเกิดของเขาไม่มีคณะนี้ และครอบครัวของจุงก็ไม่มีเงินพอจะส่งเขาไปเรียนที่อื่นที่มีคณะนี้
+                        รวมถึงอาชีพนักโบราณคดีในตอนนั้นอาจจะหาเลี้ยงชีพได้ยาก
+                        ทำให้สุดท้ายเขาจึงตัดสินใจเข้าศึกษาในคณะแพทยศาสตร์เพราะค่อนข้างแน่นอนในเรื่องความมั่นคงของรายได้
+                        และตรงกับความสนใจของเขาทั้งเรื่องจิตวิญญาณและชีววิทยา
+                    </p>
+
+                    <div style="display: flex; align-items: center; gap: 15px; margin-left: 250px; margin-bottom: 20px;">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/11-11-24-basel-by-ralfr-035.jpg/250px-11-11-24-basel-by-ralfr-035.jpg">
+
+                        <div>
+                            <p>อาคารศูนย์กลางเก่าของมหาวิทยาลัยบาเซิล <br> ซึ่งเป็นอาคารที่จุงเคยเรียนตอนเป็นนักศึกษาแพทย์</p>
+                            <a href="https://en.wikipedia.org/wiki/File:11-11-24-basel-by-ralfr-035.jpg" target="_blank">ที่มารูปภาพจาก Wikipedia</a>
+                        </div>
+                    </div>
+
+                    <p style="font-size: 20px; line-height: 1.8; margin-bottom: 20px;">
+                        ปี ค.ศ. 1895 จุงได้รับทุนจากมหาวิทยาลัยบาเซิลสำหรับการศึกษาในคณะแพทยศาสตร์ แต่ในปีต่อมาพ่อของจุงได้เสียชีวิตลง
+                        ทำให้สถานะของครอบครัวค่อนข้างวิกฤต ครอบครัวของจุงได้รับการช่วยเหลือจากญาติ ๆ ซึ่งรวมถึงการศึกษาของจุงด้วย
+                    </p>
+
+                    <p style="font-size: 20px; line-height: 1.8; margin-bottom: 20px;">
+                        ในช่วงแรก จุงได้เป็นผู้ช่วยสอนที่สถาบันกายวิภาคศาสตร์ มหาวิทยาลัยบาเซิล
+                        ซึ่งกายวิภาคศาสตร์เป็นศาสตร์ที่จุงค่อนข้างถนัด
+                        นอกจากนี้จุงมีความสนใจในมานุษยวิทยาบรรพกาลและการค้นพบครั้งสำคัญของฟอสซิลมนุษย์โบราณสายพันธ์ โฮโมอิเร็กตัส และ
+                        นีแอนเดอร์ทาล ประสบการณ์นี้ส่งผลต่อความสนใจของเขาในวิวัฒนาการของมนุษย์
+                        จุงเชื่อว่าหากเรามีโครงสร้างร่างกายบางส่วนที่สืบทอดมาจากบรรพบุรุษ โครงสร้างบางอย่างทางจิตใจก็อาจถูกส่งต่อมาด้วย
+                        แนวคิดนี้คือรากฐานของทฤษฏี <i>Archetypes</i> และ <i>Collective Unconscious</i> ของจุงในอนาคต
+                        ซึ่งเป็นแนวคิดเกี่ยวกับโครงสร้างหรือรูปแบบบางอย่างทางจิตใจของมนุษย์ทุกคนที่ถูกส่งต่อมาจากบรรพบุรุษ
+                        ซึ่งอาจจะแสดงออกในรูปแบบสัญลักษณ์หรือพฤติกรรมบางอย่างโดยที่เราไม่รู้ตัว (เช่นสัญลักษณ์งูกินหาง Ouroboros หรือ การวาดภาพ
+                        Mandala)
+                    </p>
+
+                    <div style="display: flex; align-items: center; gap: 60px; margin-left: 10px; margin-bottom: 20px;">
+
+                        <div style="display: flex; align-items: center; gap: 20px;">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Serpiente_alquimica.jpg/250px-Serpiente_alquimica.jpg">
+                            <div>
+                                <p>สัญลักษณ์งูกินหางหรือ Ouroboros/Uroboros <br>สัญลักษณ์โบราณที่แสดงถึงงูหรือมังกรที่กำลังกินหางตัวเอง</p>
+                                <a href="https://en.wikipedia.org/wiki/File:Serpiente_alquimica.jpg" target="_blank">ที่มารูปภาพจาก Wikipedia</a>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; align-items: center; gap: 20px;">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Painted_19th_century_Tibetan_mandala_of_the_Naropa_tradition%2C_Vajrayogini_stands_in_the_center_of_two_crossed_red_triangles%2C_Rubin_Museum_of_Art.jpg/250px-Painted_19th_century_Tibetan_mandala_of_the_Naropa_tradition%2C_Vajrayogini_stands_in_the_center_of_two_crossed_red_triangles%2C_Rubin_Museum_of_Art.jpg">
+                            <div>
+                                <p>ภาพวาดมันดาลาของ<br>พระวัชรโยคินี สัญลักษณ์ศักดิ์สิทธิ์ทางพุทธศาสนา<br>แบบทิเบตและฮินดู</p>
+                                <a href="https://en.wikipedia.org/wiki/File:Painted_19th_century_Tibetan_mandala_of_the_Naropa_tradition,_Vajrayogini_stands_in_the_center_of_two_crossed_red_triangles,_Rubin_Museum_of_Art.jpg" target="_blank">ที่มารูปภาพจาก Wikipedia</a>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <p style="font-size: 20px; line-height: 1.8; margin-bottom: 20px;">
+                        ตลอดช่วงการเรียนของเขา จุงมีความสามารถในด้านการแพทย์ที่สูงมากและเขาเกือบจะเลือกเรียนต่อเฉพาะทางด้านศัลยกรรม
+                        แต่สุดท้ายเขาได้ตัดสินใจเรียนต่อในด้านจิตเวชศาสตร์หลังจากที่ได้อ่านตำราจิตเวชศาสตร์ของ <i>ริชาร์ด ฟอน คราฟต์-เอเบิง</i>
+                        การตัดสินใจเป็นจิตแพทย์ของจุงทำให้ครอบครัวและอาจารย์ของเขาผิดหวังอย่างมาก
+                    </p>
+
+                    <p style="font-size: 20px; line-height: 1.8; margin-bottom: 20px;">
+                        <b>ช่วงแรกในการทำงานของจุง</b> เดือนธันวาคมปี ค.ศ. 1900 เขาได้ย้ายไปซูริคและเริ่มต้นการเป็นแพทย์ฝึกหัดที่โรงพยาบาล จิตเวช
+                        Burghölzli และอยู่ภายใต้การดูแลของจิตแพทย์ <i>ยูเจน บลอยเลอร์</i> ซึ่งบลอยเลอร์ได้ติดต่อกับ <i>ซิกมันด์ ฟรอยด์</i>
+                        อยู่แล้วและได้แนะนำผลงานของฟรอยด์ที่ชื่อ <i>The Interpretation of Dreams</i> ให้จุงอ่าน ในระหว่างการทำงานที่ Burghölzli
+                        จุงเริ่มสนใจ Dementia Praecox หรือโรคจิตเภทในปัจจุบัน (Dementia Praecox แปลว่าภาวะสมองเสื่อมก่อนวัย
+                        ซึ่งภายหลังถูกเปลี่ยนชื่อโดย ยูเจน บลอยเลอร์ เป็น Schizophrenia หรือ โรคจิตเภท) แม้ก่อนหน้านี้จุงจะสนใจโรคประสาทเป็นหลัก
+                        แต่โรคจิตเภทจะกลายเป็นความสนใจหลักตลอดช่วงอาชีพการงานของเขา
+                    </p>
+
+                    <h2 style="font-size: 36px; color: #4A90E2; margin-bottom: 25px;">ความเกี่ยวข้องกับบุคลสำคัญท่านอื่น</h2>
+
+                    <p style="font-size: 20px; line-height: 1.8; margin-bottom: 20px;">........</p>
+
+                    <p style="font-size: 20px; line-height: 1.8; margin-bottom: 20px;"><b>แหล่งอ้างอิง</b></p>
+
+                    <div class="divider" style="margin: 40px 0; width: 100%;"></div>
+                    <button onclick="showPage('deep')" style="background: #4A90E2; color: white; border: none; padding: 12px 30px; border-radius: 10px; cursor: pointer; font-size: 18px; font-weight: 600;">กลับหน้าจิตวิทยาเชิงลึก</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="applied-1" class="page-content">
+            <div class="applied-banner" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://www.therapytribe.com/wp-content/uploads/2023/10/What-is-Hypnosis.png');">
+                <h1>Milton H. Erickson</h1>
+                <p>"ชายผู้บุกเบิกการสะกดจิตบำบัดสมัยใหม่ และศาสตร์แห่งการสื่อสารกับจิตไร้สำนึก"</p>
+            </div>
+            <div class="article-section">
+                <div class="content-limit" style="text-align: left; background: white; padding: 60px; border-radius: 30px; box-shadow: 0 10px 40px rgba(0,0,0,0.05);">
+                    <h2 style="font-size: 36px; color: #4A90E2; margin-bottom: 25px;">หัวข้อเนื้อหาที่ 1</h2>
+                    <p style="font-size: 20px; line-height: 1.8; margin-bottom: 20px;">ใส่เนื้อหาของบทความ Milton H. Erickson ที่นี่...</p>
+                    <div class="divider" style="margin: 40px 0; width: 100%;"></div>
+                    <button onclick="showPage('applied')" style="background: #4A90E2; color: white; border: none; padding: 12px 30px; border-radius: 10px; cursor: pointer; font-size: 18px; font-weight: 600;">กลับหน้าจิตวิทยาประยุกต์</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="applied-2" class="page-content">
+            <div class="applied-banner" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://edmondbusiness.com/wp-content/uploads/2020/07/Stack-of-Never-Split-the-Difference-books.jpg');">
+                <h1>จิตวิทยาการเจรจาต่อรอง</h1>
+                <p>"เทคนิคการเจรจาต่อรองจากอดีตนักเจรจาต่อรองช่วยเหลือตัวประกันมือหนึ่งของ FBI"</p>
+            </div>
+            <div class="article-section">
+                <div class="content-limit" style="text-align: left; background: white; padding: 60px; border-radius: 30px; box-shadow: 0 10px 40px rgba(0,0,0,0.05);">
+                    <h2 style="font-size: 36px; color: #4A90E2; margin-bottom: 25px;">หัวข้อเนื้อหาที่ 1</h2>
+                    <p style="font-size: 20px; line-height: 1.8; margin-bottom: 20px;">ใส่เนื้อหาบทความการเจรจาต่อรองที่นี่...</p>
+                    <div class="divider" style="margin: 40px 0; width: 100%;"></div>
+                    <button onclick="showPage('applied')" style="background: #4A90E2; color: white; border: none; padding: 12px 30px; border-radius: 10px; cursor: pointer; font-size: 18px; font-weight: 600;">กลับหน้าจิตวิทยาประยุกต์</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="applied-3" class="page-content">
+            <div class="applied-banner" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://jamesclear.com/wp-content/uploads/2020/11/atomic-habits_gallery_hi-res_01.jpg');">
+                <h1>ATOMIC HABITS</h1>
+                <p>"การเปลี่ยนแปลงเล็ก ๆ ที่นำไปสู่ผลลัพธ์อันยิ่งใหญ่ และนิสัยที่ยั่งยืน"</p>
+            </div>
+            <div class="article-section">
+                <div class="content-limit" style="text-align: left; background: white; padding: 60px; border-radius: 30px; box-shadow: 0 10px 40px rgba(0,0,0,0.05);">
+                    <h2 style="font-size: 36px; color: #4A90E2; margin-bottom: 25px;">หัวข้อเนื้อหาที่ 1</h2>
+                    <p style="font-size: 20px; line-height: 1.8; margin-bottom: 20px;">ใส่เนื้อหาบทความที่นี่...</p>
+                    <div class="divider" style="margin: 40px 0; width: 100%;"></div>
+                    <button onclick="showPage('applied')" style="background: #4A90E2; color: white; border: none; padding: 12px 30px; border-radius: 10px; cursor: pointer; font-size: 18px; font-weight: 600;">กลับหน้าจิตวิทยาประยุกต์</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="applied-4" class="page-content">
+            <div class="applied-banner" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://lh3.googleusercontent.com/proxy/Uxks71mPDDMpvy9DF2Ogc55o28uhHtZ8ly1NT-uuxq9gKkK0TEIowjfrDW-ovZ7yXivGyRa2ZLdskFmMo5f91MaAE2TFUeLzJT7OQoxI6KqRz7tcmvjLuY_t_8suVXukohaTbADRX12dYHcPglY-ixri6w');">
+                <h1>Benjamin Franklin</h1>
+                <p>"วิธีเปลี่ยนศัตรูให้เป็นมิตรสไตล์แฟรงคลิน ชายผู้รวมแผ่นดินด้วยกลยุทธ์ทางจิตวิทยา"</p>
+            </div>
+            <div class="article-section">
+                <div class="content-limit" style="text-align: left; background: white; padding: 60px; border-radius: 30px; box-shadow: 0 10px 40px rgba(0,0,0,0.05);">
+                    <h2 style="font-size: 36px; color: #4A90E2; margin-bottom: 25px;">หัวข้อเนื้อหาที่ 1</h2>
+                    <p style="font-size: 20px; line-height: 1.8; margin-bottom: 20px;">ใส่เนื้อหาบทความที่นี่...</p>
+                    <div class="divider" style="margin: 40px 0; width: 100%;"></div>
+                    <button onclick="showPage('applied')" style="background: #4A90E2; color: white; border: none; padding: 12px 30px; border-radius: 10px; cursor: pointer; font-size: 18px; font-weight: 600;">กลับหน้าจิตวิทยาประยุกต์</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="applied-5" class="page-content">
+            <div class="applied-banner" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://neurowellnessspa.com/wp-content/uploads/2025/01/psychiatrist-vs-therapist.jpg');">
+                <h1>Richard Nelson-Jones</h1>
+                <p>"วิธีการรับฟังเชิงรุกและการแสดงความเข้าอกเข้าใจเบื้องต้น"</p>
+            </div>
+            <div class="article-section">
+                <div class="content-limit" style="text-align: left; background: white; padding: 60px; border-radius: 30px; box-shadow: 0 10px 40px rgba(0,0,0,0.05);">
+                    <h2 style="font-size: 36px; color: #4A90E2; margin-bottom: 25px;">หัวข้อเนื้อหาที่ 1</h2>
+                    <p style="font-size: 20px; line-height: 1.8; margin-bottom: 20px;">ใส่เนื้อหาบทความที่นี่...</p>
+                    <div class="divider" style="margin: 40px 0; width: 100%;"></div>
+                    <button onclick="showPage('applied')" style="background: #4A90E2; color: white; border: none; padding: 12px 30px; border-radius: 10px; cursor: pointer; font-size: 18px; font-weight: 600;">กลับหน้าจิตวิทยาประยุกต์</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="applied-6" class="page-content">
+            <div class="applied-banner" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://play-lh.googleusercontent.com/wT1THbUpcOhHJFQtHV00ASxNWfKdOzz5AtNcyXWXzU2wv0xSsbBhnPZ8OCeZklwp7T8=w3840-h2160-rw');">
+                <h1>ศาสตร์แห่งการครองใจคน</h1>
+                <p>"กลยุทธ์ครองใจคนแบบ Dale Carnegie ปรมาจารย์แห่งมนุษยสัมพันธ์"</p>
+            </div>
+            <div class="article-section">
+                <div class="content-limit" style="text-align: left; background: white; padding: 60px; border-radius: 30px; box-shadow: 0 10px 40px rgba(0,0,0,0.05);">
+                    <h2 style="font-size: 36px; color: #4A90E2; margin-bottom: 25px;">หัวข้อเนื้อหาที่ 1</h2>
+                    <p style="font-size: 20px; line-height: 1.8; margin-bottom: 20px;">ใส่เนื้อหาบทความที่นี่...</p>
+                    <div class="divider" style="margin: 40px 0; width: 100%;"></div>
+                    <button onclick="showPage('applied')" style="background: #4A90E2; color: white; border: none; padding: 12px 30px; border-radius: 10px; cursor: pointer; font-size: 18px; font-weight: 600;">กลับหน้าจิตวิทยาประยุกต์</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="deep-2" class="page-content">
+            <div class="applied-banner" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://www.wien.info/resource/image/298360/Hero-Header/1890/700/3975e619bdc71990159a60b552d16054/C179526C16003A63AF28CAC8052590DE/freud-leben-in-bildern-2020-6-.webp');">
+                <h1>Sigmund Freud</h1>
+                <p>"The Father of Psychoanalysis ชายผู้ไขปริศนาอาการฮิสทีเรีย"</p>
+            </div>
+            <div class="article-section">
+                <div class="content-limit" style="text-align: left; background: white; padding: 60px; border-radius: 30px; box-shadow: 0 10px 40px rgba(0,0,0,0.05);">
+                    <h2 style="font-size: 36px; color: #4A90E2; margin-bottom: 25px;">หัวข้อเนื้อหาที่ 1</h2>
+                    <p style="font-size: 20px; line-height: 1.8; margin-bottom: 20px;">ใส่เนื้อหาบทความที่นี่...</p>
+                    <div class="divider" style="margin: 40px 0; width: 100%;"></div>
+                    <button onclick="showPage('deep')" style="background: #4A90E2; color: white; border: none; padding: 12px 30px; border-radius: 10px; cursor: pointer; font-size: 18px; font-weight: 600;">กลับหน้าจิตวิทยาเชิงลึก</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="deep-3" class="page-content">
+            <div class="applied-banner" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://sjra-media.s3.us-west-2.amazonaws.com/wp-content/uploads/2024/04/10170226/The-Results-Of-A-Head-CT-Scan.webp');">
+                <h1>Amygdala</h1>
+                <p>"Amygdala และวิวัฒนาการของอารมณ์พื้นฐาน จากสัญชาตญาณสัตว์ป่าสู่พฤติกรรมมนุษย์สมัยใหม่"</p>
+            </div>
+            <div class="article-section">
+                <div class="content-limit" style="text-align: left; background: white; padding: 60px; border-radius: 30px; box-shadow: 0 10px 40px rgba(0,0,0,0.05);">
+                    <h2 style="font-size: 36px; color: #4A90E2; margin-bottom: 25px;">หัวข้อเนื้อหาที่ 1</h2>
+                    <p style="font-size: 20px; line-height: 1.8; margin-bottom: 20px;">ใส่เนื้อหาบทความที่นี่...</p>
+                    <div class="divider" style="margin: 40px 0; width: 100%;"></div>
+                    <button onclick="showPage('deep')" style="background: #4A90E2; color: white; border: none; padding: 12px 30px; border-radius: 10px; cursor: pointer; font-size: 18px; font-weight: 600;">กลับหน้าจิตวิทยาเชิงลึก</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="deep-4" class="page-content">
+            <div class="applied-banner" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://arthur.io/img/art/jpg/0000173451566f742/carl-jung/illustration-from-the-red-book-by-c-g-jung-8/xlarge/carl-jung--illustration-from-the-red-book-by-c-g-jung-8.webp');">
+                <h1>MAN AND HIS SYMBOLS</h1>
+                <p>"เราไม่ใช่สิ่งที่เคยเกิดขึ้นกับเรา แต่เราคือสิ่งที่เราเลือกที่จะเป็น"</p>
+            </div>
+            <div class="article-section">
+                <div class="content-limit" style="text-align: left; background: white; padding: 60px; border-radius: 30px; box-shadow: 0 10px 40px rgba(0,0,0,0.05);">
+                    <h2 style="font-size: 36px; color: #4A90E2; margin-bottom: 25px;">หัวข้อเนื้อหาที่ 1</h2>
+                    <p style="font-size: 20px; line-height: 1.8; margin-bottom: 20px;">ใส่เนื้อหาบทความที่นี่...</p>
+                    <div class="divider" style="margin: 40px 0; width: 100%;"></div>
+                    <button onclick="showPage('deep')" style="background: #4A90E2; color: white; border: none; padding: 12px 30px; border-radius: 10px; cursor: pointer; font-size: 18px; font-weight: 600;">กลับหน้าจิตวิทยาเชิงลึก</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="deep-5" class="page-content">
+            <div class="applied-banner" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://i.pinimg.com/1200x/2c/1d/f8/2c1df8bbd3152fe60fe0c5839d69eb6c.jpg');">
+                <h1>Iceberg Theory</h1>
+                <p>"ทุกพฤติกรรมคืออาการที่แสดงออกของบางสิ่งที่ซ่อนอยู่ลึกกว่านั้น"</p>
+            </div>
+            <div class="article-section">
+                <div class="content-limit" style="text-align: left; background: white; padding: 60px; border-radius: 30px; box-shadow: 0 10px 40px rgba(0,0,0,0.05);">
+                    <h2 style="font-size: 36px; color: #4A90E2; margin-bottom: 25px;">หัวข้อเนื้อหาที่ 1</h2>
+                    <p style="font-size: 20px; line-height: 1.8; margin-bottom: 20px;">ใส่เนื้อหาบทความที่นี่...</p>
+                    <div class="divider" style="margin: 40px 0; width: 100%;"></div>
+                    <button onclick="showPage('deep')" style="background: #4A90E2; color: white; border: none; padding: 12px 30px; border-radius: 10px; cursor: pointer; font-size: 18px; font-weight: 600;">กลับหน้าจิตวิทยาเชิงลึก</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="deep-6" class="page-content">
+            <div class="applied-banner" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://hammer.ucla.edu/sites/default/files/styles/large/public/migrated-assets/media/exhibitions/2010/RedBookInstall2.jpg.jpeg?itok=amMSLxK1');">
+                <h1>Anima and Animus</h1>
+                <p>"ผู้หญิงในจิตไร้สำนึกของผู้ชาย และ ผู้ชายในจิตไร้สำนึกของผู้หญิง"</p>
+            </div>
+            <div class="article-section">
+                <div class="content-limit" style="text-align: left; background: white; padding: 60px; border-radius: 30px; box-shadow: 0 10px 40px rgba(0,0,0,0.05);">
+                    <h2 style="font-size: 36px; color: #4A90E2; margin-bottom: 25px;">หัวข้อเนื้อหาที่ 1</h2>
+                    <p style="font-size: 20px; line-height: 1.8; margin-bottom: 20px;">ใส่เนื้อหาบทความที่นี่...</p>
+                    <div class="divider" style="margin: 40px 0; width: 100%;"></div>
+                    <button onclick="showPage('deep')" style="background: #4A90E2; color: white; border: none; padding: 12px 30px; border-radius: 10px; cursor: pointer; font-size: 18px; font-weight: 600;">กลับหน้าจิตวิทยาเชิงลึก</button>
+                </div>
+            </div>
+        </div>
+        
+        <!--
+        <div id="ใส่-id-หน้าที่นี่-ให้ตรงกับหน้าปก" class="page-content">
+            <div class="applied-banner" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('ใส่ลิงก์รูปแบนเนอร์ด้านบนแนวนอน');">
+                <h1>ชื่อหัวเรื่อง</h1>
+                <p>"คำคม หรือ คำอธิบายสั้นๆ"</p>
+            </div>
+            <div class="article-section">
+                <div class="content-limit" style="text-align: left; background: white; padding: 60px; border-radius: 30px; box-shadow: 0 10px 40px rgba(0,0,0,0.05);">
+                    <h2 style="font-size: 36px; color: #4A90E2; margin-bottom: 25px;">หัวข้อเนื้อหาที่ 1</h2>
+                    <p style="font-size: 20px; line-height: 1.8; margin-bottom: 20px;">พิมพ์เนื้อหาของคุณที่นี่... สามารถคัดลอกบรรทัดแท็ก p นี้เพิ่มได้ถ้ายาว</p>
+                    <h2 style="font-size: 36px; color: #4A90E2; margin-bottom: 25px;">หัวข้อเนื้อหาที่ 2</h2>
+                    <p style="font-size: 20px; line-height: 1.8; margin-bottom: 20px;">พิมพ์เนื้อหาของคุณที่นี่...</p>
+                    <div class="divider" style="margin: 40px 0; width: 100%;"></div>
+                    <button onclick="showPage('ใส่-id-หมวดหมู่ที่จะกลับไป-เช่น-deep')" style="background: #4A90E2; color: white; border: none; padding: 12px 30px; border-radius: 10px; cursor: pointer; font-size: 18px; font-weight: 600;">กลับหน้าหมวดหมู่</button>
+                </div>
+            </div>
+        </div>
+        ตัวสำเร็จรูปปปปป สำหรับเนื้อหา -->
+
+        <div id="deep-about-container">
+            <div id="about" class="page-content">
+                
+                <div class="about-banner">
+                    <div class="shape shape-circle-1" style="top: -150px; left: -100px;"></div>
+                    <div class="shape shape-dots" style="bottom: 10px; right: 10vw;"></div>
+                    
+                    <div class="about-banner-container">
+                        <div class="about-banner-text">
+                            <h1>เรื่องราวของผม</h1>
+                            <p>ผมได้รับไอเดียในการทำเว็บไซต์นี้มาจากสมุดบันทึกความรู้ส่วนตัวของผมและเป็นสมุดที่ผมคอยบันทึกความรู้ต่าง ๆ ทางจิตวิทยาที่ผมได้ศึกษามาและเกิดความสนใจ ซึ่งจุดเริ่มต้นของนิสัยการบันทึกความรู้นี้เกิดจากความเสียดายและความกลัวของผมที่ว่าวันนึงอาจลืมความรู้ที่ได้รับมาหากปราศจากการทบทวนหรือการจัดระเบียบ</p>
+                        </div>
+                        <div class="about-banner-image">
+                            <div class="about-banner-img-wrapper">
+                                <img src="https://images.unsplash.com/photo-1544716278-e513176f20b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Psychology Notebook Idea">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="storyboard-wrapper">
+
+                    <div class="storyboard-bg-progress" id="storyboardBgProgress"></div>
+
+                    <div class="storyboard-sticky">
+                        <div class="storyboard-track">
+                            
+                            <div class="storyboard-slide">
+                                <div class="decor-word decor-black" style="top: 18%; left: 56%;">
+                                    <span class="outline">ANXIETY</span><span class="solid"></span>
+                                </div>
+                                <div class="shape shape-dots" style="top: 15%; left: 40%;"></div>
+                                <div class="storyboard-img">
+                                    <img src="https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iKIWgaiJUtss/v2/-1x-1.webp" alt="Psychology Books">
+                                </div>
+                                <div class="storyboard-text">
+                                    <p style="margin-bottom: 18px;"><b>ทุกอย่างเริ่มต้นจากความกังวล</b></p>
+                                    <p>ความรู้สึกนี้เริ่มต้นขึ้นเมื่อผมได้อ่าน<span class="nowrap">หนังสือ</span><span class="nowrap">จิตวิทยา</span><span class="nowrap">การเจรจาต่อรอง</span>เล่มนึงที่ชื่อว่า Never Split the Difference เขียนโดย Chris Voss <span class="nowrap">หลังจาก</span>ที่ผมได้อ่านจบไปผมรู้สึกว่าเนื้อหาในนั้นค่อนข้างมี<span class="nowrap">ประโยชน์</span>และหากเทียบกับราคาที่จ่ายไปเมื่อตอนที่ผมซื้อ<span class="nowrap">หนังสือ</span>ก็ถือว่า<span class="nowrap">คุ้มค่า</span>มาก ๆ เพราะ<span class="nowrap">ความรู้</span>ที่ได้จาก<span class="nowrap">หนังสือ</span>เล่มนั้นเป็น<span class="nowrap">ประสบการณ์</span>โดยตรงจาก<span class="nowrap">ผู้เชี่ยวชาญ</span>ด้านการ<span class="nowrap">เจรจาต่อรอง</span></p>
+                                </div>
+                            </div>
+
+                            <div class="storyboard-slide">
+                                <div class="shape shape-circle-2" style="top: 10%; left: 0%;"></div>
+                                <div class="shape shape-dots" style="bottom: 10%; left: 35%;"></div>
+                                <div class="storyboard-img">
+                                    <img src="https://static0.polygonimages.com/wordpress/wp-content/uploads/2025/12/leon-kennedy-resident-evil-requieum.jpg?w=1600&h=900&fit=crop" alt="Focus Study">
+                                </div>
+                                <div class="storyboard-text">
+                                    <p>แม้ผมจะไม่ได้มี<span class="nowrap">ความฝัน</span>ที่จะเป็น<span class="nowrap">นักเจรจาต่อรอง</span>แต่ผมก็รู้สึกว่า<span class="nowrap">ความรู้</span>ที่ได้มานั้นมีค่ามาก เพราะพอลองคิด<span class="nowrap">ไตร่ตรอง</span>ดูก็คงเป็นการยากที่ผมจะได้เจอกับคนเก่ง ๆ แบบนี้ใน<span class="nowrap">ชีวิตจริง</span> ดังนั้นการอ่านเรื่องราวของเขาก็เหมือนการเรียนรู้จาก<span class="nowrap">ประสบการณ์</span>คนอื่นโดยที่เราไม่ต้องลงแรง<span class="nowrap">พิสูจน์</span><span class="nowrap">ความรู้</span>และไม่ต้องรับ<span class="nowrap">ความเสี่ยง</span>จากการลงมือทำ เพราะเพียงแค่อ่านก็ได้รับมาแล้ว</p>
+                                </div>
+                            </div>
+
+                            <div class="storyboard-slide">
+                                <div class="decor-word decor-blue" style="top: 30%; right: 17%;">
+                                    <span class="outline">PASS</span><span class="solid">ION</span>
+                                </div>
+                                <div class="shape shape-circle-2" style="top: 10%; left: 0%;"></div>
+                                <div class="shape shape-dots" style="bottom: 10%; left: 35%;"></div>
+                                <div class="storyboard-img">
+                                    <img src="https://victorianweb.org/science/psych/jung.jpg" alt="Focus Study">
+                                </div>
+                                <div class="storyboard-text">
+                                    <p>นอกจากนี้ผมก็ได้นำ<span class="nowrap">เทคนิค</span>และ<span class="nowrap">กระบวนการ</span>หลายส่วนใน<span class="nowrap">หนังสือ</span>ไป<span class="nowrap">ประยุกต์ใช้</span>ได้จริงเช่น การฟังเชิงรุก การแสดง<span class="nowrap">ความเข้าอกเข้าใจ</span> การเลียนแบบคำพูด และถึงแม้จะเป็นการ<span class="nowrap">ประยุกต์ใช้</span>ในทางอ้อมแต่ก็ได้<span class="nowrap">ผลลัพธ์</span>ที่<span class="nowrap">น่าพึงพอใจ</span>ซึ่งด้วย<span class="nowrap">ประโยชน์</span>ที่มากมายเหล่านี้จึงทำให้<span class="nowrap">ความหวงแหน</span>ใน<span class="nowrap">ความรู้</span>ของผมมีมากขึ้น</p>
+                                </div>
+                            </div>
+
+                            <div class="storyboard-slide">
+                                <div class="decor-word decor-black" style="bottom: 78%; right: 20%;">
+                                    <span class="outline">UNCONS</span><span class="solid">CIOUS</span>
+                                </div>
+                                <div class="shape shape-dots" style="top: 25%; left: 40%;"></div>
+                                <div class="storyboard-img">
+                                    <img src="https://images.squarespace-cdn.com/content/v1/56310633e4b0df9e1fadf93a/1556078511554-8LUXXGQ0JW65RP38UAY3/Carl-Jung-in-his-study-room.jpg" alt="Mind and Memory">
+                                </div>
+                                <div class="storyboard-text">
+                                    <p style="margin-bottom: 18px;"><b>เมื่อความสนใจลดลง ความรู้ก็เริ่มหายไป</b></p>
+                                    <p>มีวันนึงที่ผมสังเกตว่าตัวผมเองลืมใช้<span class="nowrap">วิธีการ</span>เหล่านั้นใน<span class="nowrap">สถานการณ์</span>ที่ควรใช้ไป ผมจึงเริ่ม<span class="nowrap">ตระหนัก</span>ถึง<span class="nowrap">ความจริง</span>ข้อนึงได้ว่า มันเป็นเรื่องยากที่ผมจะสามารถใช้<span class="nowrap">ความรู้</span>ทั้งหมดที่มีได้<span class="nowrap">ตลอดเวลา</span>หาก<span class="nowrap">ปราศจาก</span>การฝึกซ้ำ ๆ จนกลายเป็น<span class="nowrap">พฤติกรรม</span><span class="nowrap">อัตโนมัติ</span>และการที่ผมจะทำแบบนั้นได้ก็หมายความว่าตัวผมจะต้องทุ่มเทกับการฝึก</p>
+                                </div>
+                            </div>
+
+                            <div class="storyboard-slide">
+                                <div class="shape shape-dots" style="bottom: 20%; left: 10%;"></div>
+                                <div class="storyboard-img">
+                                    <img src="https://images.unsplash.com/photo-1517842645767-c639042777db?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Notebook Notes">
+                                </div>
+                                <div class="storyboard-text">
+                                    <p>แล้วผมจะทำได้ยังไงในเมื่อสุดท้ายผมก็จะอ่าน<span class="nowrap">หนังสือ</span>เล่มใหม่ในอีกวัน นั่นเท่ากับว่าผมกำลังฉายไฟแห่ง<span class="nowrap">ความสนใจ</span>ไปที่อื่นซึ่งอาจเป็นเหตุให้เกิดการลืม เมื่อผมคิดได้เช่นนั้นก็จึงตั้งใจว่าจะหาวิธีบันทึก<span class="nowrap">ความรู้</span>เอาไว้แบบสั้น ๆ เพื่อให้ง่ายต่อการนำไปใช้ เช่นการจดบันทึก การจดสรุป หรือการเขียน<span class="nowrap">อธิบายไว้</span>ใน<span class="nowrap">หนังสือ</span>เล่มนั้น ๆ ซึ่งก็เป็นวิธีที่ได้ผล<br>แต่มันก็ยังไม่สามารถ<span class="nowrap">แก้ปัญหา</span>ได้ทั้งหมด</p>
+                                </div>
+                            </div>
+                            
+                            <div class="storyboard-slide">
+                                <div class="decor-word decor-navy" style="top: 75%; left: -5%;">
+                                    <span class="outline">CONSCIOUS</span><span class="solid">NESS</span>
+                                </div>
+                                <div class="shape shape-circle-1" style="bottom: -50px; left: -50px; transform: scale(0.7);"></div>
+                                <div class="shape shape-dots" style="top: 10%; left: 20%;"></div>
+                                <div class="storyboard-img">
+                                    <img src="https://sustainablebusinessmagazine.net/wp-content/uploads/2025/08/Regal-Blue-Tang-1.jpg" alt="Subconscious Abstract">
+                                </div>
+                                <div class="storyboard-text">
+                                    <p style="margin-bottom: 18px;"><b>จากความกังวลสู่ไอเดียใหม่</b></p>
+                                    <p>จนกระทั่งผมได้ศึกษา<span class="nowrap">ความรู้</span><span class="nowrap">เพิ่มเติม</span>และพบว่า<span class="nowrap">ความรู้</span><br>เหล่านั้นไม่ได้หายไปไหนมันแค่<span class="nowrap">สูญเสีย</span>พลังงานจาก<span class="nowrap">จิตสำนึก</span>และย้ายลงไปอยู่ใน<span class="nowrap">จิตไร้สำนึก</span> นั่นเท่ากับว่าวันนึงเราอาจดึงมันกลับมาสู่<span class="nowrap">จิตสำนึก</span>ได้เสมอหากถูกกระตุ้น <br>ดังนั้น<span class="nowrap">เว็บไซต์นี้</span>จึง<span class="nowrap">ถือกำเนิดขึ้น</span>เพื่อเป็นที่สำหรับสะสม<span class="nowrap">ความรู้</span>ใน<span class="nowrap">รูปแบบ</span>ที่<span class="nowrap">เข้าใจง่าย</span>และเข้าถึงได้สะดวก <br>โดยไม่ต้องคอยเปิดหาจากใน<span class="nowrap">หนังสือ</span>และอยู่ใน<span class="nowrap">รูปแบบ</span>ที่เป็นระเบียบและ<span class="nowrap">น่าดึงดูด</span></p>
+                                </div>
+                            </div>
+
+                            <div class="storyboard-slide">
+                                <div class="decor-word decor-black" style="top: 9%; left: 58%; transform: translateX(-50%);">
+                                    <span class="outline">COLLEC</span><span class="solid">TIVE</span>
+                                </div>
+                                <div class="shape shape-dots" style="bottom: 15%; left: 30%;"></div>
+                                <div class="storyboard-img">
+                                    <img src="https://assets-prd.ignimgs.com/2022/06/06/pjimage-2022-06-06t165441-445-1654548897379.jpg" alt="Website Creation">
+                                </div>
+                                <div class="storyboard-text">
+                                    <p>การสร้าง<span class="nowrap">เว็บไซต์นี้</span>ขึ้นมานอกจากจะเป็น<span class="nowrap">เครื่องป้องกัน</span>การลืมแล้ว ยังเป็นตัวที่ช่วยให้ผมได้ค้นหา<span class="nowrap">ความรู้</span>มากขึ้นพร้อม<span class="nowrap">ขัดเกลา</span>เนื้อหาต่าง ๆ ที่ได้รับมาให้แม่นยำและ<span class="nowrap">ละเอียดยิ่งขึ้นไปอีก</span> นอกจากนี้การสร้าง<span class="nowrap">เว็บไซต์นี้</span>ยังช่วย<span class="nowrap">ส่งเสริม</span>นิสัย<span class="nowrap">การเรียนรู้</span>และการอ่านมากขึ้น ตามกฏ<br>การสร้างนิสัยที่ว่า ทำให้เห็นได้ชัด ทำให้น่าดึงดูด <br>ทำให้เป็นเรื่องง่าย และทำให้น่า<span class="nowrap">พึงพอใจ</span> ดังนั้นจึงเห็นได้ชัดว่าการสร้าง<span class="nowrap">เว็บไซต์นี้</span>ขึ้นมาจะเป็น<span class="nowrap">ประโยชน์</span>ต่อตัวผมทั้งใน<span class="nowrap">ปัจจุบัน</span>และใน<span class="nowrap">อนาคต</span>ครับ</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="full-width-section" style="background-color: #eff4f5; padding: 100px 20px;">
+                    <div class="author-container">
+                        <h2 style="font-size: 36px; color: #4A90E2; margin-bottom: 50px; font-weight: 800; text-align: center;">ข้อมูลผู้จัดทำ</h2>
+                        
+                        <div class="author-card">
+                            <img src="https://i.pinimg.com/564x/62/c8/62/62c86273c4a282fb3dd4df3c8228477a.jpg" alt="Creator Profile" class="author-img">
+                            <div class="author-info">
+                                <h3>นายนพณัฐ เนียมเปรม</h3>
+                                <p><strong>อายุ:</strong> 17 ปี</p>
+                                <p><strong>การศึกษา:</strong> ปัจจุบันกำลังศึกษาอยู่ชั้นมัธยมศึกษาปีที่ 6 <br>สายการเรียนวิทย์-คณิต-คอมพิวเตอร์ โรงเรียนทวีธาภิเศก</p>
+                                <p>ผมเป็นเด็กสายวิทย์คอมที่ค้นพบว่าตนเองมีความหลงใหลใน<span class="nowrap">ศาสตร์</span>ของ<span class="nowrap">จิตวิทยา</span> <br> โดยเฉพาะ<span class="nowrap">ทฤษฎี</span><span class="nowrap">จิตวิเคราะห์</span>และแนวคิดของ Carl G. Jung เป้าหมายของผมคือการเข้าศึกษาต่อด้าน<span class="nowrap">จิตวิทยาคลินิก</span>ที่<span class="nowrap">มหาวิทยาลัยเกษตรศาสตร์</span> โดยมีความฝันที่อยากเข้าใจ<span class="nowrap">กระบวนการทางจิต</span>ของมนุษย์เป็นแรงผลักดัน ปัจจุบันผมกำลังเตรียมตัวเพื่อสานฝันนี้ ทั้งผ่านการศึกษาด้วยตัวเอง การเข้า<span class="nowrap">ค่ายจิตวิทยา</span> และการทำกิจกรรมต่าง ๆ ที่ทำให้ผมได้ฝึกและพัฒนา<span class="nowrap">ทักษะ</span>ที่จะจำเป็นในอนาคต เช่น Active Listening , Social & Emotional Intelligence Skill</p>
+                                <div class="author-tags">
+                                    <span class="tag">#Dek70</span>
+                                    <span class="tag">#ClinicalPsychology</span>
+                                    <span class="tag">#Jungian</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3 class="contact-section-title">ช่องทางการติดต่อ</h3>
+                        <div class="contact-grid">
+                            <div class="contact-box">
+                                <strong>Email</strong>
+                                <span>epicdinogran@gmail.com</span>
+                            </div>
+                            <div class="contact-box">
+                                <strong>Phone</strong>
+                                <span>064-909-5548</span>
+                            </div>
+                            <div class="contact-box">
+                                <strong>Instagram</strong>
+                                <span>@oau_nn</span>
+                            </div>
+                            <div class="contact-box">
+                                <strong>Line ID</strong>
+                                <span>auwuou1351</span>
+                            </div>
+                        </div>
+
+                        <div class="quote-container" style="margin: 0; padding-top: 20px;">
+                            <div class="quote">"จนกว่าคุณจะทำให้ <span>จิตไร้สำนึก</span> กลายเป็น <span>จิตสำนึก</span><br>มันจะกำหนดทิศทางชีวิตคุณ...<br>และคุณจะเรียกมันว่า <span>โชคชะตา</span>" <span class="quote-author">— CARL GUSTAV JUNG</span></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showPage(pageId) {
+            var pages = document.getElementsByClassName('page-content');
+            var mainContainer = document.getElementById('other-pages-container');
+            var deepAboutWrap = document.getElementById('deep-about-container');
+            var homeContent = document.getElementById('home');
+            
+            for (var i = 0; i < pages.length; i++) { 
+                pages[i].classList.remove('active'); 
+            }
+            
+            if (pageId === 'home') {
+                homeContent.style.display = 'block';
+                mainContainer.style.display = 'none';
+            } else {
+                homeContent.style.display = 'none';
+                mainContainer.style.display = 'block';
+                
+                // ตรวจสอบว่าถ้าเป็นหน้า about ถึงจะแสดงโซนผู้แต่ง
+                if (pageId === 'about') {
+                    deepAboutWrap.style.display = 'block';
+                } else {
+                    deepAboutWrap.style.display = 'none';
+                }
+                
+                document.getElementById(pageId).classList.add('active');
+            }
+            window.scrollTo({top: 0, behavior: 'smooth'});
+            // เผื่อไว้รีเซ็ตค่าตอนเปลี่ยนหน้า
+            window.dispatchEvent(new Event('scroll'));
+        }
+
+        // --- JavaScript สำหรับควบคุมการเลื่อนแนวนอน ---
+        window.addEventListener('scroll', () => {
+            const wrapper = document.querySelector('.storyboard-wrapper');
+            const track = document.querySelector('.storyboard-track');
+            const aboutPage = document.getElementById('about');
+            
+            // ให้ทำงานเฉพาะเมื่ออยู่ในหน้า "เกี่ยวกับเว็บไซต์" เท่านั้น
+            if (!wrapper || !track || !aboutPage.classList.contains('active')) return;
+
+            const wrapperTop = wrapper.getBoundingClientRect().top;
+            const navbarHeight = 100; // ความสูงของแถบเมนูด้านบน
+            
+            // คำนวณระยะที่เลื่อนผ่านจุดล็อก
+            let scrolledPast = navbarHeight - wrapperTop; 
+            let maxScrollable = wrapper.offsetHeight - window.innerHeight;
+            
+            // คำนวณความคืบหน้า (0 ถึง 1)
+            let progress = scrolledPast / maxScrollable;
+            
+            // ป้องกันไม่ให้ทะลุขอบเขต
+            if (progress < 0) progress = 0;
+            if (progress > 1) progress = 1;
+            
+            // เลื่อนเนื้อหาไปทางซ้ายตามความคืบหน้า
+            const maxTranslate = track.scrollWidth - window.innerWidth;
+            const currentTranslate = Math.round(progress * maxTranslate);
+            track.style.transform = `translate3d(-${currentTranslate}px, 0, 0)`;
+
+            // อัปเดตความกว้างของแถบพื้นหลังสีฟ้า
+            const bgProgress = document.getElementById('storyboardBgProgress');
+            if (bgProgress) {
+                bgProgress.style.width = (progress * 100) + '%';
+            }
+        });
+    </script>
+</body>
+</html>
